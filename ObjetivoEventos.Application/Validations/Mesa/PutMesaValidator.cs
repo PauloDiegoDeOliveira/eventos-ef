@@ -10,12 +10,10 @@ namespace ObjetivoEventos.Application.Validations.Mesa
     public class PutMesaValidator : AbstractValidator<PutMesaDto>
     {
         private readonly IMesaApplication mesaApplication;
-        private readonly ICadeiraApplication cadeiraApplication;
 
         public PutMesaValidator(IMesaApplication mesaApplication, ICadeiraApplication cadeiraApplication)
         {
             this.mesaApplication = mesaApplication;
-            this.cadeiraApplication = cadeiraApplication;
 
             RuleFor(x => x.Id)
                .NotNull()
@@ -109,15 +107,15 @@ namespace ObjetivoEventos.Application.Validations.Mesa
             return mesaApplication.ValidarFileiraEColunaPut(putMesaDto);
         }
 
-        private bool ValidarInputListaCadeira(PostMesaDto postMesaDto)
+        private static bool ValidarInputListaCadeira(PostMesaDto postMesaDto)
         {
             return postMesaDto.Cadeiras.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }
 
         // Exemplo de validação por listas onde o referencial é o id
-        private bool ValidaCadeiraRegistrada(PutMesaDto putMesaDto)
-        {
-            return mesaApplication.ValidaCadeiraRegistrada(putMesaDto);
-        }
+        //private bool ValidaCadeiraRegistrada(PutMesaDto putMesaDto)
+        //{
+        //    return mesaApplication.ValidaCadeiraRegistrada(putMesaDto);
+        //}
     }
 }

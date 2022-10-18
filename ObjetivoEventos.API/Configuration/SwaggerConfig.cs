@@ -61,15 +61,15 @@ namespace ObjetivoEventos.Application.Configuration
             app.UseSwaggerUI(
                 options =>
                 {
-                    foreach (var description in provider.ApiVersionDescriptions)
+                    foreach (string description in provider.ApiVersionDescriptions.Select(description => description.GroupName))
                     {
-                        if (environment.IsDevelopment() == true)
+                        if (environment.IsDevelopment())
                         {
-                            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                            options.SwaggerEndpoint($"/swagger/{description}/swagger.json", description.ToUpperInvariant());
                         }
                         else
                         {
-                            options.SwaggerEndpoint($"/ObjetivoEventos/API/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                            options.SwaggerEndpoint($"/ObjetivoEventos/API/swagger/{description}/swagger.json", description.ToUpperInvariant());
                         }
                     }
                 });

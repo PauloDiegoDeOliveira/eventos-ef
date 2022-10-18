@@ -8,7 +8,7 @@ namespace ObjetivoEventos.Application.Configuration
     {
         public static void AddSMTPConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<SMTPOptions>(configuration.GetSection("SMTPOptions"));
+            services.Configure<SmtpOptions>(configuration.GetSection("SMTPOptions"));
         }
     }
 }

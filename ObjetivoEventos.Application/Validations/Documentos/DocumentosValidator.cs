@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ObjetivoEventos.Application.Validations.Documentos
 {
-    public class CpfValidacao
+    public static class CpfValidacao
     {
         public const int TamanhoCpf = 11;
 
@@ -43,7 +43,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
 
         private static bool TemDigitosValidos(string valor)
         {
-            string number = valor.Substring(0, TamanhoCpf - 2);
+            string number = valor[..(TamanhoCpf - 2)];
             var digitoVerificador = new DigitoVerificador(number)
                 .ComMultiplicadoresDeAte(2, 11)
                 .Substituindo("0", 10, 11);
@@ -55,7 +55,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
         }
     }
 
-    public class CnpjValidacao
+    public static class CnpjValidacao
     {
         public const int TamanhoCnpj = 14;
 
@@ -95,7 +95,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
 
         private static bool TemDigitosValidos(string valor)
         {
-            string number = valor.Substring(0, TamanhoCnpj - 2);
+            string number = valor[..(TamanhoCnpj - 2)];
 
             var digitoVerificador = new DigitoVerificador(number)
                 .ComMultiplicadoresDeAte(2, 9)
@@ -112,9 +112,9 @@ namespace ObjetivoEventos.Application.Validations.Documentos
     {
         private string _numero;
         private const int Modulo = 11;
-        private readonly List<int> _multiplicadores = new List<int> { 2, 3, 4, 5, 6, 7, 8, 9 };
+        private readonly List<int> _multiplicadores = new() { 2, 3, 4, 5, 6, 7, 8, 9 };
         private readonly IDictionary<int, string> _substituicoes = new Dictionary<int, string>();
-        private bool _complementarDoModulo = true;
+        private readonly bool _complementarDoModulo = true;
 
         public DigitoVerificador(string numero)
         {
@@ -148,7 +148,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
 
         public string CalculaDigito()
         {
-            return !(_numero.Length > 0) ? "" : GetDigitSum();
+            return (_numero.Length <= 0) ? "" : GetDigitSum();
         }
 
         private string GetDigitSum()
@@ -170,7 +170,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
         }
     }
 
-    public class Utils
+    public static class Utils
     {
         public static string ApenasNumeros(string valor)
         {
@@ -180,7 +180,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
             {
                 if (char.IsDigit(s))
                 {
-                    onlyNumber += s;
+                    _ = onlyNumber.Append(s);
                 }
             }
 

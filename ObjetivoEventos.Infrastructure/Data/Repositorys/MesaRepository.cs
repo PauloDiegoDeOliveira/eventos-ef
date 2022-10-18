@@ -105,6 +105,9 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
                           .Include(p => p.Cadeiras)
                           .FirstOrDefault(p => p.Id == mesa.Id);
 
+            if (consulta == null)
+                return false;
+
             return consulta.Cadeiras.Any(e => mesa.Cadeiras.Any(x => x.Id == e.Id));
         }
 
@@ -113,7 +116,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
             if (mesa.Id == Guid.Empty)
                 return appDbContext.Mesas
                               .AsNoTracking()
-                              .Any(x => x.Fileira.ToLower() == mesa.Fileira.ToLower() && mesa.Coluna == mesa.Coluna && x.Status != Status.Excluido.ToString());
+                              .Any(x => x.Fileira.ToLower() == mesa.Fileira.ToLower() && x.Coluna == mesa.Coluna && x.Status != Status.Excluido.ToString());
             else
                 return appDbContext.Mesas
                               .AsNoTracking()

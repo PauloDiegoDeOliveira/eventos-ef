@@ -1,6 +1,6 @@
 ﻿namespace ObjetivoEventos.Identity.Constants
 {
-    public class PermissionTypes
+    public static class PermissionTypes
     {
         public const string Ler = nameof(Ler);
         public const string Inserir = nameof(Inserir);

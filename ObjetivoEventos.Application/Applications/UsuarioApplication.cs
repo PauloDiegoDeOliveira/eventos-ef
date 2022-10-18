@@ -77,9 +77,9 @@ namespace ObjetivoEventos.Application.Applications
             return objFinal;
         }
 
-        public async Task<ViewUsuarioDto> GetByIdAsync(Guid Id)
+        public async Task<ViewUsuarioDto> GetByIdAsync(Guid id)
         {
-            return mapper.Map<ViewUsuarioDto>(await usuarioService.GetByIdAsync(Id));
+            return mapper.Map<ViewUsuarioDto>(await usuarioService.GetByIdAsync(id));
         }
 
         public async Task<DefaultResponse> CadastrarUsuario(PostCadastroUsuarioDto postCadastroUsuarioDto)
@@ -115,12 +115,12 @@ namespace ObjetivoEventos.Application.Applications
             return DefaultResponse;
         }
 
-        public async Task<UsuarioLoginResponse> Login(PostLoginUsuarioDto usuarioLogin)
+        public async Task<UsuarioLoginResponse> Login(PostLoginUsuarioDto postLoginUsuarioDto)
         {
-            SignInResult result = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha, false, true);
+            SignInResult result = await _signInManager.PasswordSignInAsync(postLoginUsuarioDto.Email, postLoginUsuarioDto.Senha, false, true);
 
             if (result.Succeeded)
-                return await GerarCredenciais(usuarioLogin.Email);
+                return await GerarCredenciais(postLoginUsuarioDto.Email);
 
             UsuarioLoginResponse usuarioLoginResponse = new();
 

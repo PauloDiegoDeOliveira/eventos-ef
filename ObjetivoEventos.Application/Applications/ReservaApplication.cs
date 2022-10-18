@@ -88,9 +88,9 @@ namespace ObjetivoEventos.Application.Applications
             return reservaExcluida;
         }
 
-        public async Task<List<ViewReservaDto>> DeleteRangeAsync(List<ViewReservaDto> reservaDtos)
+        public async Task<List<ViewReservaDto>> DeleteRangeAsync(List<ViewReservaDto> viewReservaDtos)
         {
-            return mapper.Map<List<ViewReservaDto>>(await reservaService.DeleteRangeAsync(mapper.Map<List<Reserva>>(reservaDtos)));
+            return mapper.Map<List<ViewReservaDto>>(await reservaService.DeleteRangeAsync(mapper.Map<List<Reserva>>(viewReservaDtos)));
         }
 
         public async Task<List<ViewReservaDto>> DeleteByConnectionId(string connectionId)

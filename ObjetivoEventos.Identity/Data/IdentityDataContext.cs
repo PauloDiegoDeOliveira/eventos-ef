@@ -10,11 +10,11 @@ namespace ObjetivoEventos.Identity.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(IdentityDataContext).Assembly);
-            modelBuilder.HasDefaultSchema("Identity");
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(typeof(IdentityDataContext).Assembly);
+            builder.HasDefaultSchema("Identity");
         }
     }
 }

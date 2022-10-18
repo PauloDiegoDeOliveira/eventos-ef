@@ -12,7 +12,7 @@ namespace ObjetivoEventos.Application.BackgroundServices
         private readonly ReservaBackgroundService reservaBackgroundService;
         private readonly PedidoBackgroundService pedidoBackgroundService;
         private readonly EventoBackgroundService eventoBackgroundService;
-        private static DateTime nextDay;
+        private DateTime nextDay = DateTime.Today;
 
         public MyBackgroundService(ReservaBackgroundService reservaBackgroundService,
             PedidoBackgroundService pedidoBackgroundService,
@@ -21,7 +21,6 @@ namespace ObjetivoEventos.Application.BackgroundServices
             this.reservaBackgroundService = reservaBackgroundService;
             this.pedidoBackgroundService = pedidoBackgroundService;
             this.eventoBackgroundService = eventoBackgroundService;
-            nextDay = DateTime.Today;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

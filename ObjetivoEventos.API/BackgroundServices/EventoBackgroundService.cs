@@ -10,13 +10,13 @@ namespace ObjetivoEventos.Application.BackgroundServices
 {
     public class EventoBackgroundService
     {
-        private readonly IServiceScope scope;
+        private readonly IServiceScope serviceScope;
         private readonly IEventoApplication eventoApplication;
 
         public EventoBackgroundService(IServiceProvider serviceProvider)
         {
-            scope = serviceProvider.CreateScope();
-            eventoApplication = scope.ServiceProvider.GetRequiredService<IEventoApplication>();
+            serviceScope = serviceProvider.CreateScope();
+            eventoApplication = serviceScope.ServiceProvider.GetRequiredService<IEventoApplication>();
         }
 
         public async Task<List<ViewEventoDto>> GetEventosExpiradosAsync()

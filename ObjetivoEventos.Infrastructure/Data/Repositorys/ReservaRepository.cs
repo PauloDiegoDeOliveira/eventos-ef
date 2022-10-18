@@ -160,8 +160,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
 
                 if (mesa is null)
                     return false;
-                else
-                    if (mesa.Cadeiras.Any(x => x.Id == reserva.CadeiraId))
+                else if (mesa.Cadeiras.Any(x => x.Id == reserva.CadeiraId))
                     return true;
                 else
                     return false;

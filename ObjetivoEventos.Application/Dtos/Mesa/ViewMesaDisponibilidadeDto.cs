@@ -39,7 +39,7 @@ namespace ObjetivoEventos.Application.Dtos.Mesa
             Status = myStatus;
         }
 
-        private List<ViewCadeiraDisponibilidadeDto> PopulaCadeiras(List<Domain.Entitys.Cadeira> listaCadeiras)
+        private static List<ViewCadeiraDisponibilidadeDto> PopulaCadeiras(List<Domain.Entitys.Cadeira> listaCadeiras)
         {
             List<ViewCadeiraDisponibilidadeDto> list = new();
 

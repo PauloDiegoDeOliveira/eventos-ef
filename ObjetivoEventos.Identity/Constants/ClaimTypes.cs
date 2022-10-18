@@ -1,6 +1,6 @@
 ﻿namespace ObjetivoEventos.Identity.Constants
 {
-    public class ClaimTypes
+    public static class ClaimTypes
     {
         public const string Cadeira = nameof(Cadeira);
         public const string Mesa = nameof(Mesa);

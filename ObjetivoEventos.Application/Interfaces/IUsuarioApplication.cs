@@ -27,7 +27,7 @@ namespace ObjetivoEventos.Application.Interfaces
 
         Task<DefaultResponse> ReenviarConfirmacaoEmail(PostEmailDto postConfirmacaoEmailDto);
 
-        Task<ViewUsuarioDto> DeleteAsync(Guid id);
+        Task<ViewUsuarioDto> DeleteAsync(Guid d);
 
         bool ValidarId(Guid id);
     }

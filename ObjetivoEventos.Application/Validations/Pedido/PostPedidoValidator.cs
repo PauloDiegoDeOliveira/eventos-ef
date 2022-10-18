@@ -9,12 +9,10 @@ namespace ObjetivoEventos.Application.Validations.Pedido
     public class PostPedidoValidator : AbstractValidator<PostPedidoDto>
     {
         private readonly IPedidoApplication pedidoApplication;
-        private readonly IReservaApplication reservaApplication;
 
         public PostPedidoValidator(IReservaApplication reservaApplication, IPedidoApplication pedidoApplication)
         {
             this.pedidoApplication = pedidoApplication;
-            this.reservaApplication = reservaApplication;
 
             RuleFor(x => x.Reservas)
               .NotNull()
@@ -57,7 +55,7 @@ namespace ObjetivoEventos.Application.Validations.Pedido
             });
         }
 
-        private bool ValidarInputLista(PostPedidoDto postPedidoDto)
+        private static bool ValidarInputLista(PostPedidoDto postPedidoDto)
         {
             return postPedidoDto.Reservas.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }

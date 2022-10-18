@@ -10,9 +10,6 @@ namespace ObjetivoEventos.Application.Validations.Setor
 {
     public class PostSetorValidator : AbstractValidator<PostSetorDto>
     {
-        private readonly ISetorApplication setorApplication;
-        private readonly ICadeiraApplication cadeiraApplication;
-        private readonly IMesaApplication mesaApplication;
         private readonly ILocalApplication localApplication;
 
         public PostSetorValidator(ISetorApplication setorApplication,
@@ -20,9 +17,6 @@ namespace ObjetivoEventos.Application.Validations.Setor
                                   IMesaApplication mesaApplication,
                                   ILocalApplication localApplication)
         {
-            this.setorApplication = setorApplication;
-            this.cadeiraApplication = cadeiraApplication;
-            this.mesaApplication = mesaApplication;
             this.localApplication = localApplication;
 
             RuleFor(x => x.LocalId)
@@ -100,12 +94,12 @@ namespace ObjetivoEventos.Application.Validations.Setor
             });
         }
 
-        private bool ValidarInputListaCadeira(PostSetorDto postMesaDto)
+        private static bool ValidarInputListaCadeira(PostSetorDto postMesaDto)
         {
             return postMesaDto.Cadeiras.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }
 
-        private bool ValidarInputListaMesa(PostSetorDto postMesaDto)
+        private static bool ValidarInputListaMesa(PostSetorDto postMesaDto)
         {
             return postMesaDto.Mesas.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }

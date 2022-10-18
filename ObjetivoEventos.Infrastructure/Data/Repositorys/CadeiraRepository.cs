@@ -65,7 +65,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
             if (cadeira.Id == Guid.Empty)
                 return appDbContext.Cadeiras
                               .AsNoTracking()
-                              .Any(x => x.Fileira.ToLower() == cadeira.Fileira.ToLower() && cadeira.Coluna == cadeira.Coluna && x.Status != Status.Excluido.ToString());
+                              .Any(x => x.Fileira.ToLower() == cadeira.Fileira.ToLower() && x.Coluna == cadeira.Coluna && x.Status != Status.Excluido.ToString());
             else
                 return appDbContext.Cadeiras
                                .AsNoTracking()

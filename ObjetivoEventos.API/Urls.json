@@ -1,17 +1,17 @@
 ﻿{
   "EventoHomologacao": {
-    "IP": "",
-    "DNS": "",
+    "IP": "\\\\192.168.103.20\\Sites\\Sistemas\\ObjetivoEventos\\Arquivos\\Evento\\Imagens",
+    "DNS": "https://sistemashomologacao.suafaculdade.com.br/ObjetivoEventos/Arquivos/Evento/Imagens",
     "SPLIT": "ObjetivoEventos/"
   },
   "EventoDesenvolvimento": {
-    "IP": "",
-    "DNS": "",
+    "IP": "\\\\192.168.103.20\\Sites\\Sistemas\\ObjetivoEventos\\Arquivos\\Evento\\Imagens",
+    "DNS": "https://sistemashomologacao.suafaculdade.com.br/ObjetivoEventos/Arquivos/Evento/Imagens",
     "SPLIT": "ObjetivoEventos/"
   },
   "EventoProducao": {
-    "IP": "",
-    "DNS": "",
+    "IP": "\\\\192.168.103.20\\Sites\\Sistemas\\ObjetivoEventos\\Arquivos\\Evento\\Imagens",
+    "DNS": "https://sistemashomologacao.suafaculdade.com.br/ObjetivoEventos/Arquivos/Evento/Imagens",
     "SPLIT": "ObjetivoEventos/"
   }
 }

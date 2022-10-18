@@ -13,15 +13,15 @@ namespace ObjetivoEventos.Application.BackgroundServices
 {
     public class PedidoBackgroundService
     {
-        private readonly IServiceScope scope;
+        private readonly IServiceScope serviceScope;
         private readonly IPedidoApplication pedidoApplication;
         private readonly IUsuarioApplication usuarioApplication;
 
         public PedidoBackgroundService(IServiceProvider serviceProvider)
         {
-            scope = serviceProvider.CreateScope();
-            pedidoApplication = scope.ServiceProvider.GetRequiredService<IPedidoApplication>();
-            usuarioApplication = scope.ServiceProvider.GetRequiredService<IUsuarioApplication>();
+            serviceScope = serviceProvider.CreateScope();
+            pedidoApplication = serviceScope.ServiceProvider.GetRequiredService<IPedidoApplication>();
+            usuarioApplication = serviceScope.ServiceProvider.GetRequiredService<IUsuarioApplication>();
         }
 
         public async Task<List<ViewPedidoDto>> PutPedidosAtivosParaInativosByEventosExpirados(List<ViewEventoDto> eventos)
@@ -59,9 +59,9 @@ namespace ObjetivoEventos.Application.BackgroundServices
                         if (user != null)
                             await pedidoApplication.CriarEmail("Olá {{UserName}}, você ainda não realizou o pagamento do seu pedido (Objetivo Eventos).", "WaitingPayment", user.Nome, viewPedidoDto.Numero.ToString(), new List<string> { user.Email });
                     }
-                }
 
-                viewPedidoDtos.Clear();
+                    viewPedidoDtos.Clear();
+                }
             }
         }
     }

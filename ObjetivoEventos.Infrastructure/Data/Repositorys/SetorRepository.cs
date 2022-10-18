@@ -51,7 +51,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
 
             List<Cadeira> finalList = new();
             foreach (Cadeira cadeira in listaCadeiras)
-                if (cadeira.Coluna <= gridParameters[gridParameters.IndexOf(gridParameters.Where(x => x.Fileira.ToString() == cadeira.Fileira).FirstOrDefault())].Coluna)
+                if (cadeira.Coluna <= gridParameters[gridParameters.IndexOf(gridParameters.FirstOrDefault(x => x.Fileira.ToString() == cadeira.Fileira))].Coluna)
                     finalList.Add(cadeira);
 
             setor.ListaCadeiras(finalList);
@@ -77,7 +77,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
 
             List<Cadeira> listaCadeiras = new();
             foreach (Cadeira cadeira in cadeiras)
-                if (cadeira.Coluna <= gridParameters[gridParameters.IndexOf(gridParameters.Where(x => x.Fileira.ToString() == cadeira.Fileira).FirstOrDefault())].Coluna)
+                if (cadeira.Coluna <= gridParameters[gridParameters.IndexOf(gridParameters.FirstOrDefault(x => x.Fileira.ToString() == cadeira.Fileira))].Coluna)
                     listaCadeiras.Add(cadeira);
 
             cadeiras = listaCadeiras.OrderBy(x => x.Fileira).ThenBy(x => x.Coluna).AsQueryable();

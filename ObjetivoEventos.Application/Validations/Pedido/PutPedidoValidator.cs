@@ -9,13 +9,11 @@ namespace ObjetivoEventos.Application.Validations.Pedido
 {
     public class PutPedidoValidator : AbstractValidator<PutPedidoDto>
     {
-        private readonly IReservaApplication reservaApplication;
         private readonly IPedidoApplication pedidoApplication;
 
         public PutPedidoValidator(IReservaApplication reservaApplication, IPedidoApplication pedidoApplication)
         {
             this.pedidoApplication = pedidoApplication;
-            this.reservaApplication = reservaApplication;
 
             RuleFor(x => x.Id)
               .NotNull()
@@ -75,7 +73,7 @@ namespace ObjetivoEventos.Application.Validations.Pedido
             return pedidoApplication.ValidarId(id);
         }
 
-        private bool ValidarInputLista(PutPedidoDto putPedidoDto)
+        private static bool ValidarInputLista(PutPedidoDto putPedidoDto)
         {
             return putPedidoDto.Reservas.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }

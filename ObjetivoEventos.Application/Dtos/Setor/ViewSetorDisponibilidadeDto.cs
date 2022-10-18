@@ -26,7 +26,7 @@ namespace ObjetivoEventos.Application.Dtos.Setor
             Mesas = PopulaMesas(setor.Mesas);
         }
 
-        private List<ViewCadeiraDisponibilidadeDto> PopulaCadeiras(List<Domain.Entitys.Cadeira> listaCadeiras)
+        private static List<ViewCadeiraDisponibilidadeDto> PopulaCadeiras(List<Domain.Entitys.Cadeira> listaCadeiras)
         {
             List<ViewCadeiraDisponibilidadeDto> list = new();
 
@@ -36,7 +36,7 @@ namespace ObjetivoEventos.Application.Dtos.Setor
             return list;
         }
 
-        private List<ViewMesaDisponibilidadeDto> PopulaMesas(List<Domain.Entitys.Mesa> listaMesas)
+        private static List<ViewMesaDisponibilidadeDto> PopulaMesas(List<Domain.Entitys.Mesa> listaMesas)
         {
             List<ViewMesaDisponibilidadeDto> list = new();
 

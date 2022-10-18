@@ -19,7 +19,7 @@ namespace ObjetivoEventos.Identity.Attributes
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = context.HttpContext.User as ClaimsPrincipal;
+            ClaimsPrincipal user = context.HttpContext.User;
 
             if (user == null || !user.Identity.IsAuthenticated)
             {

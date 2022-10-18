@@ -7,7 +7,7 @@ namespace ObjetivoEventos.Application.Attributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value != null && value is Guid && !Guid.Empty.Equals(value))
+            if (value is Guid && !Guid.Empty.Equals(value))
             {
                 return ValidationResult.Success;
             }

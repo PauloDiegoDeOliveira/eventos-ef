@@ -9,12 +9,10 @@ namespace ObjetivoEventos.Application.Validations.Mesa
     public class PostMesaValidator : AbstractValidator<PostMesaDto>
     {
         private readonly IMesaApplication mesaApplication;
-        private readonly ICadeiraApplication cadeiraApplication;
 
         public PostMesaValidator(IMesaApplication mesaApplication, ICadeiraApplication cadeiraApplication)
         {
             this.mesaApplication = mesaApplication;
-            this.cadeiraApplication = cadeiraApplication;
 
             RuleFor(x => x.Nome)
              .NotNull()
@@ -79,7 +77,7 @@ namespace ObjetivoEventos.Application.Validations.Mesa
             });
         }
 
-        private bool ValidarInputListaCadeira(PostMesaDto postMesaDto)
+        private static bool ValidarInputListaCadeira(PostMesaDto postMesaDto)
         {
             return postMesaDto.Cadeiras.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }

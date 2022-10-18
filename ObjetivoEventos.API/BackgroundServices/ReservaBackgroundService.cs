@@ -11,15 +11,15 @@ namespace ObjetivoEventos.Application.BackgroundServices
 {
     public class ReservaBackgroundService
     {
-        private readonly IServiceScope scope;
+        private readonly IServiceScope serviceScope;
         private readonly IReservaApplication reservaApplication;
         private readonly MessageHub messageHub;
 
         public ReservaBackgroundService(IServiceProvider serviceProvider)
         {
-            scope = serviceProvider.CreateScope();
-            reservaApplication = scope.ServiceProvider.GetRequiredService<IReservaApplication>();
-            messageHub = scope.ServiceProvider.GetRequiredService<MessageHub>();
+            serviceScope = serviceProvider.CreateScope();
+            reservaApplication = serviceScope.ServiceProvider.GetRequiredService<IReservaApplication>();
+            messageHub = serviceScope.ServiceProvider.GetRequiredService<MessageHub>();
         }
 
         public async Task VerificaReservasExpiradas()
@@ -27,9 +27,10 @@ namespace ObjetivoEventos.Application.BackgroundServices
             List<ViewReservaDto> viewReservadosDtos = await reservaApplication.GetReservasByTempoSituacaoAsync(5, SituacaoReserva.Reservado);
 
             if (viewReservadosDtos != null && viewReservadosDtos.Count > 0)
+            {
                 await DeleteRangeAsync(viewReservadosDtos);
-
-            viewReservadosDtos.Clear();
+                viewReservadosDtos.Clear();
+            }
         }
 
         public async Task<List<ViewReservaDto>> DeleteRangeAsync(List<ViewReservaDto> viewReservaDtos)

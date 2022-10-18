@@ -1,6 +1,6 @@
 ﻿namespace ObjetivoEventos.Application.Dtos.SMTP
 {
-    public class SMTPOptions
+    public class SmtpOptions
     {
         public string SenderAdress { get; set; }
         public string SenderDisplayName { get; set; }

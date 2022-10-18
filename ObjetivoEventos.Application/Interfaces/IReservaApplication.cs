@@ -29,7 +29,7 @@ namespace ObjetivoEventos.Application.Interfaces
 
         bool VerificaDisponibilidadeReserva(PostReservaDto postReservaDto);
 
-        bool ValidarSetorCadeiraMesa(PostReservaDto reserva);
+        bool ValidarSetorCadeiraMesa(PostReservaDto postReservaDto);
 
         bool ValidaListId(List<Guid> ids);
 

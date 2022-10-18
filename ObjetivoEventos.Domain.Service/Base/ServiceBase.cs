@@ -25,7 +25,7 @@ namespace ObjetivoEventos.Domain.Service.Base
             notificador.Handle(new Notificacao(mensagem));
         }
 
-        public ServiceBase(IRepositoryBase<TEntity> repositoryBase)
+        protected ServiceBase(IRepositoryBase<TEntity> repositoryBase)
         {
             this.repositoryBase = repositoryBase;
         }

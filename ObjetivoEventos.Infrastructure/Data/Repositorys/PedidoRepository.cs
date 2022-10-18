@@ -197,7 +197,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
             if (pedido.Reservas.Count <= 0)
                 return null;
 
-            Reserva reservaAntiga = pedido.Reservas.Where(x => x.Id == reservaAntigaId).FirstOrDefault();
+            Reserva reservaAntiga = pedido.Reservas.FirstOrDefault(x => x.Id == reservaAntigaId);
 
             if (reservaAntiga == null)
                 return null;

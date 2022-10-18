@@ -11,8 +11,6 @@ namespace ObjetivoEventos.Application.Validations.Setor
     public class PutSetorValidator : AbstractValidator<PutSetorDto>
     {
         private readonly ISetorApplication setorApplication;
-        private readonly ICadeiraApplication cadeiraApplication;
-        private readonly IMesaApplication mesaApplication;
         private readonly ILocalApplication localApplication;
 
         public PutSetorValidator(ISetorApplication setorApplication,
@@ -21,8 +19,6 @@ namespace ObjetivoEventos.Application.Validations.Setor
                                  ILocalApplication localApplication)
         {
             this.setorApplication = setorApplication;
-            this.cadeiraApplication = cadeiraApplication;
-            this.mesaApplication = mesaApplication;
             this.localApplication = localApplication;
             this.localApplication = localApplication;
 
@@ -118,12 +114,12 @@ namespace ObjetivoEventos.Application.Validations.Setor
             return setorApplication.ValidarId(id);
         }
 
-        private bool ValidarInputListaCadeira(PutSetorDto putSetorDto)
+        private static bool ValidarInputListaCadeira(PutSetorDto putSetorDto)
         {
             return putSetorDto.Cadeiras.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }
 
-        private bool ValidarInputListaMesa(PutSetorDto putSetorDto)
+        private static bool ValidarInputListaMesa(PutSetorDto putSetorDto)
         {
             return putSetorDto.Mesas.GroupBy(x => x.Id).All(g => g.Count() == 1);
         }

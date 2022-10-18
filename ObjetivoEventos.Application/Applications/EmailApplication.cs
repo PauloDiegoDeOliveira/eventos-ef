@@ -14,9 +14,9 @@ namespace ObjetivoEventos.Application.Applications
     {
         private const string templatePath = "\\wwwroot\\EmailTemplate\\{0}.html";
 
-        private readonly SMTPOptions smtpOptions;
+        private readonly SmtpOptions smtpOptions;
 
-        public EmailApplication(IOptions<SMTPOptions> smtpOptions)
+        public EmailApplication(IOptions<SmtpOptions> smtpOptions)
         {
             this.smtpOptions = smtpOptions.Value;
         }

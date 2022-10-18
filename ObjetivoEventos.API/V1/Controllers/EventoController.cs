@@ -137,7 +137,7 @@ namespace ObjetivoEventos.Application.V1.Controllers
             {
                 logger.LogInformation("----------------Foi requisitada a inserção de um novo evento----------------");
 
-                inserido = await eventoApplication.PostAsync(postEventoDto, Urls["IP"], Urls["DNS"], Urls["SPLIT"]); ;
+                inserido = await eventoApplication.PostAsync(postEventoDto, Urls["IP"], Urls["DNS"], Urls["SPLIT"]);
             }
 
             if (inserido is null)
