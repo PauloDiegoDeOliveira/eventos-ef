@@ -1,0 +1,17 @@
+﻿{
+  "EventoHomologacao": {
+    "IP": "",
+    "DNS": "",
+    "SPLIT": "ObjetivoEventos/"
+  },
+  "EventoDesenvolvimento": {
+    "IP": "",
+    "DNS": "",
+    "SPLIT": "ObjetivoEventos/"
+  },
+  "EventoProducao": {
+    "IP": "",
+    "DNS": "",
+    "SPLIT": "ObjetivoEventos/"
+  }
+}

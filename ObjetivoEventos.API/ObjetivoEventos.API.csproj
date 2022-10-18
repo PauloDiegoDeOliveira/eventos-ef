@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\EmailTemplate\NewOrder.html" />
+    <Content Remove="wwwroot\EmailTemplate\OrderCanceled.html" />
+    <Content Remove="wwwroot\EmailTemplate\OrderChanged.html" />
+    <Content Remove="wwwroot\EmailTemplate\OrderCompleted.html" />
+    <Content Remove="wwwroot\EmailTemplate\PaymentDone.html" />
+    <Content Remove="wwwroot\EmailTemplate\WaitingPayment.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="log.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.8.0" />
+    <PackageReference Include="SerilogTimings" Version="3.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ObjetivoEventos.Infrastructure\ObjetivoEventos.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\EmailTemplate\OrderChanged.html" />
+    <None Include="wwwroot\EmailTemplate\OrderCanceled.html" />
+    <None Include="wwwroot\EmailTemplate\OrderCompleted.html" />
+    <None Include="wwwroot\EmailTemplate\PaymentDone.html" />
+    <None Include="wwwroot\EmailTemplate\WaitingPayment.html" />
+    <None Include="wwwroot\EmailTemplate\NewOrder.html" />
+    <None Include="wwwroot\EmailTemplate\ConfirmEmailTemplate.html" />
+    <None Include="wwwroot\EmailTemplate\ResetPasswordTemplate.html" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://github.com/fbecart/zinoma/releases/latest/download/zinoma-schema.json" appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>
