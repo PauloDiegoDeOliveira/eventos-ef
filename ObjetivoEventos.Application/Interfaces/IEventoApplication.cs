@@ -27,6 +27,8 @@ namespace ObjetivoEventos.Application.Interfaces
 
         Task<List<ViewEventoDto>> PutStatusRangeAsync(List<Guid> ids, Status status);
 
+        bool ValidarEventoExpirado(Guid id);
+
         bool ValidarId(Guid id);
 
         bool ValidarDataHoraPost(PostEventoDto postEventoDto);

@@ -19,6 +19,8 @@ namespace ObjetivoEventos.Application.Dtos.Evento
 
         public int Duracao { get; set; }
 
+        public string CaminhoRelativo { get; set; }
+
         public Status Status { get; set; }
 
         public ViewLocalDto Local { get; set; }

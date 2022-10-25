@@ -24,6 +24,11 @@ namespace ObjetivoEventos.Domain.Service
             return await setorRepository.GetPaginationAsync(parametersPalavraChave);
         }
 
+        public async Task<List<Setor>> GetSetorByReservas(List<Guid> reservasId)
+        {
+            return await setorRepository.GetSetorByReservas(reservasId);
+        }
+
         public async Task<Setor> PostSetorByCadeirasAutomaticoAsync(Setor setor, List<GridParameters> gridParameters)
         {
             return await setorRepository.PostSetorByCadeirasAutomaticoAsync(setor, gridParameters);

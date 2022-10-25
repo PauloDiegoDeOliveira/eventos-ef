@@ -41,6 +41,52 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
             return await Task.FromResult(PagedList<Setor>.ToPagedList(Setores, parametersPalavraChave.NumeroPagina, parametersPalavraChave.ResultadosExibidos));
         }
 
+        public async Task<List<Setor>> GetSetoresByListIdNoTracking(List<Guid> ids)
+        {
+            return await appDbContext.Setores.AsNoTracking()
+                         .Where(setor => ids.Contains(setor.Id))
+                         .ToListAsync();
+        }
+
+        public async Task<List<Setor>> GetSetorByReservas(List<Guid> reservasId)
+        {
+            List<Reserva> reservas = await appDbContext.Reservas.Where(x => reservasId.Contains(x.Id)).ToListAsync();
+            IEnumerable<IGrouping<Guid, Reserva>> reservaGroups = reservas.GroupBy(x => x.SetorId);
+
+            List<Setor> setores = new();
+            foreach (IGrouping<Guid, Reserva> reservaGroup in reservaGroups)
+            {
+                List<Setor> dadosSetor = new();
+                foreach (Reserva reserva in reservaGroup)
+                {
+                    if (reserva.MesaId != null)
+                        dadosSetor.Add(await appDbContext.Setores.AsNoTracking()
+                            .Include(x => x.Mesas.Where(x => x.Id == reserva.MesaId))
+                            .ThenInclude(x => x.Cadeiras.Where(x => x.Id == reserva.CadeiraId))
+                            .FirstOrDefaultAsync(x => x.Id == reserva.SetorId));
+                    else
+                        dadosSetor.Add(await appDbContext.Setores.AsNoTracking()
+                            .Include(x => x.Cadeiras.Where(x => x.Id == reserva.CadeiraId))
+                            .FirstOrDefaultAsync(x => x.Id == reserva.SetorId));
+                }
+
+                foreach (Setor setor in dadosSetor)
+                {
+                    if (dadosSetor.IndexOf(setor) > 0)
+                    {
+                        if (setor.Mesas != null)
+                            dadosSetor[0].Mesas.AddRange(setor.Mesas);
+
+                        dadosSetor[0].Cadeiras.AddRange(setor.Cadeiras);
+                    }
+                }
+
+                setores.Add(dadosSetor[0]);
+            }
+
+            return setores;
+        }
+
         public async Task<Setor> PostSetorByCadeirasAutomaticoAsync(Setor setor, List<GridParameters> gridParameters)
         {
             List<Cadeira> listaCadeiras = await appDbContext.Cadeiras
@@ -104,7 +150,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
 
         private async Task InsertMesasAsync(Setor setor)
         {
-            List<Mesa> mesasConsultadas = new List<Mesa>();
+            List<Mesa> mesasConsultadas = new();
             foreach (Mesa mesa in setor.Mesas)
             {
                 Mesa mesaConsultada = await appDbContext.Mesas
@@ -118,7 +164,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
 
         private async Task InsertCadeirasAsync(Setor setor)
         {
-            List<Cadeira> cadeirasConsultadas = new List<Cadeira>();
+            List<Cadeira> cadeirasConsultadas = new();
             foreach (Cadeira cadeira in setor.Cadeiras)
             {
                 Cadeira cadeiraConsultada = await appDbContext.Cadeiras.FindAsync(cadeira.Id);

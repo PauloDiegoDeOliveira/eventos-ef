@@ -11,6 +11,7 @@ using ObjetivoEventos.Domain.Enums;
 using ObjetivoEventos.Domain.Pagination;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ObjetivoEventos.Application.Applications
@@ -44,6 +45,11 @@ namespace ObjetivoEventos.Application.Applications
         public async Task<List<ViewReservaDto>> GetReservasByTempoSituacaoAsync(int minutos, SituacaoReserva situacaoReserva)
         {
             return mapper.Map<List<ViewReservaDto>>(await reservaService.GetReservaByTempoSituacaoAsync(minutos, situacaoReserva));
+        }
+
+        public async Task<ViewValorTotalReservaDto> GetValorTotal(PostListaIdReservaDto postListaIdReservaDto)
+        {
+            return new ViewValorTotalReservaDto(await reservaService.GetValorTotal(postListaIdReservaDto.Ids));
         }
 
         public async Task<List<ViewReservaDto>> PutStatusRangeAsync(List<Guid> ids, Status status)

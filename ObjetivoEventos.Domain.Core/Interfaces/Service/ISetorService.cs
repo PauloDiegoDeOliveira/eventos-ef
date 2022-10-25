@@ -12,6 +12,8 @@ namespace ObjetivoEventos.Domain.Core.Interfaces.Service
     {
         Task<PagedList<Setor>> GetPaginationAsync(ParametersPalavraChave parametersPalavraChave);
 
+        Task<List<Setor>> GetSetorByReservas(List<Guid> reservasId);
+
         Task<Setor> PostSetorByCadeirasAutomaticoAsync(Setor setor, List<GridParameters> gridParameters);
 
         Task<Setor> PutSetorByCadeirasAutomaticoAsync(Setor setor, List<GridParameters> gridParameters);

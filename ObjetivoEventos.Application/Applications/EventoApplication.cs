@@ -136,6 +136,11 @@ namespace ObjetivoEventos.Application.Applications
             return mapper.Map<List<ViewEventoDto>>(await eventoService.PutStatusRangeAsync(ids, status));
         }
 
+        public bool ValidarEventoExpirado(Guid id)
+        {
+            return eventoService.ValidarEventoExpirado(id);
+        }
+
         public bool ValidarId(Guid id)
         {
             return eventoService.ValidarId(id);

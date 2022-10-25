@@ -16,7 +16,6 @@ namespace ObjetivoEventos.Application.Mappers
         private void Map()
         {
             CreateMap<PostSetorDto, Setor>().ReverseMap();
-            CreateMap<PostSetorPadraoDto, Setor>().ReverseMap();
             CreateMap<PostAutomaticoSetorDto, Setor>().ReverseMap();
 
             CreateMap<PutSetorDto, Setor>().ReverseMap();

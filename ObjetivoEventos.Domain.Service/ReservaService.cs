@@ -6,6 +6,7 @@ using ObjetivoEventos.Domain.Pagination;
 using ObjetivoEventos.Domain.Service.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ObjetivoEventos.Domain.Service
@@ -13,15 +14,50 @@ namespace ObjetivoEventos.Domain.Service
     public class ReservaService : ServiceBase<Reserva>, IReservaService
     {
         private readonly IReservaRepository reservaRepository;
+        private readonly ISetorRepository setorRepository;
 
-        public ReservaService(IReservaRepository reservaRepository) : base(reservaRepository)
+        public ReservaService(IReservaRepository reservaRepository, ISetorRepository setorRepository) : base(reservaRepository)
         {
             this.reservaRepository = reservaRepository;
+            this.setorRepository = setorRepository;
         }
 
         public async Task<PagedList<Reserva>> GetPaginationAsync(ParametersBase parametersBase)
         {
             return await reservaRepository.GetPaginationAsync(parametersBase);
+        }
+
+        public async Task<string> GetValorTotal(List<Guid> ids)
+        {
+            List<Reserva> reservas = await reservaRepository.GetReservasByListIdNoTracking(ids);
+
+            if (reservas == null)
+            {
+                Notificar("Nenhuma reserva foi encontrada.");
+                return null;
+            }
+
+            List<Guid> setoresIds = reservas.Select(x => x.SetorId).Distinct().ToList();
+
+            List<Setor> setores = await setorRepository.GetSetoresByListIdNoTracking(setoresIds);
+
+            if (setores == null)
+            {
+                Notificar("Nenhum setor foi encontrado.");
+                return null;
+            }
+
+            float valor = 0;
+            foreach (Reserva reserva in reservas)
+            {
+                foreach (Setor setor in setores)
+                {
+                    if (reserva.SetorId == setor.Id)
+                        valor += setor.Preco;
+                }
+            }
+
+            return valor.ToString();
         }
 
         public async Task<Reserva> GetReservasDetalhesById(Guid id)

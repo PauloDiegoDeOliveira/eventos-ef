@@ -18,6 +18,8 @@ namespace ObjetivoEventos.Domain.Core.Interfaces.Repositories
 
         Task<List<Reserva>> GetReservasByListId(List<Guid> ids);
 
+        Task<List<Reserva>> GetReservasByListIdNoTracking(List<Guid> ids);
+
         Task<List<Reserva>> PutStatusRangeAsync(List<Guid> ids, Status status);
 
         Task<List<Reserva>> PutRangeAsync(List<Reserva> reservas);

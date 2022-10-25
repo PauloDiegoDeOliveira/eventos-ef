@@ -56,6 +56,13 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
                  .ToListAsync();
         }
 
+        public async Task<List<Reserva>> GetReservasByListIdNoTracking(List<Guid> ids)
+        {
+            return await appDbContext.Reservas.AsNoTracking()
+                         .Where(reserva => ids.Contains(reserva.Id))
+                         .ToListAsync();
+        }
+
         public async Task<List<Reserva>> GetReservasByTempoSituacaoAsync(int minutos, SituacaoReserva situacaoReserva)
         {
             return await appDbContext.Reservas.Where(x => x.SituacaoReserva == situacaoReserva.ToString() && x.CriadoEm.AddMinutes(minutos) < DateTime.Now && x.Status == Status.Ativo.ToString()).AsNoTracking().ToListAsync();

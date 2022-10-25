@@ -32,7 +32,10 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
                 usuario = usuario.Where(x => EF.Functions.Like(x.Nome, $"%{parametersPalavraChave.PalavraChave}%"));
 
             if (parametersPalavraChave.Id != null)
-                usuario = usuario.Where(x => parametersPalavraChave.Id.Contains(Guid.Parse(x.Id)));
+            {
+                string[] guids = parametersPalavraChave.Id.Select(x => x.ToString()).ToArray();
+                usuario = usuario.Where(x => guids.Contains(x.Id));
+            }
 
             return await Task.FromResult(PagedList<Usuario>.ToPagedList(usuario, parametersPalavraChave.NumeroPagina, parametersPalavraChave.ResultadosExibidos));
         }

@@ -20,6 +20,8 @@ namespace ObjetivoEventos.Domain.Core.Interfaces.Service
 
         Task<List<Evento>> PutStatusRangeAsync(List<Guid> ids, Status status);
 
+        bool ValidarEventoExpirado(Guid id);
+
         bool ValidarId(Guid id);
 
         bool ValidarDataHora(Evento evento);

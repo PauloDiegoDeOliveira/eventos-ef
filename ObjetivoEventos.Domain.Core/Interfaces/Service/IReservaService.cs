@@ -14,6 +14,8 @@ namespace ObjetivoEventos.Domain.Core.Interfaces.Service
 
         Task<Reserva> GetReservasDetalhesById(Guid id);
 
+        Task<string> GetValorTotal(List<Guid> ids);
+
         Task<List<Reserva>> GetReservaByTempoSituacaoAsync(int minutos, SituacaoReserva situacaoReserva);
 
         Task<List<Reserva>> PutSituacaoReservaAsync(List<Guid> ids, SituacaoReserva situacaoReserva);

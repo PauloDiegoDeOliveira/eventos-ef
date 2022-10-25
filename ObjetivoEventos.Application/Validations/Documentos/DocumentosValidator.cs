@@ -180,7 +180,7 @@ namespace ObjetivoEventos.Application.Validations.Documentos
             {
                 if (char.IsDigit(s))
                 {
-                    _ = onlyNumber.Append(s);
+                    onlyNumber += s;
                 }
             }
 

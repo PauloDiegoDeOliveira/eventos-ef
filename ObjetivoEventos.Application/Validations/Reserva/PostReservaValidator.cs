@@ -87,6 +87,12 @@ namespace ObjetivoEventos.Application.Validations.Reserva
                    {
                        return ExisteEventoId(dto.EventoId);
                    }).WithMessage("Nenhum evento foi encontrado com o id informado.");
+
+                RuleFor(dto => dto.EventoId)
+                   .Must((dto, cancellation) =>
+                   {
+                       return !ValidarEventoExpirado(dto.EventoId);
+                   }).WithMessage("O evento selecionado já aconteceu.");
             });
 
             When(x => x.SetorId != Guid.Empty, () =>
@@ -143,6 +149,11 @@ namespace ObjetivoEventos.Application.Validations.Reserva
         private bool ExisteEventoId(Guid eventoId)
         {
             return eventoApplication.ValidarId(eventoId);
+        }
+
+        private bool ValidarEventoExpirado(Guid eventoId)
+        {
+            return eventoApplication.ValidarEventoExpirado(eventoId);
         }
 
         private bool ExisteSetorId(Guid setorId)

@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using ObjetivoEventos.Application.Extensions;
 using ObjetivoEventos.Identity.Constants;
 using ObjetivoEventos.Identity.Extensions;
 using ObjetivoEventos.Identity.Policies.HorarioComercial;
+using Serilog.Context;
 using System;
 using System.Text;
 
@@ -71,6 +73,13 @@ namespace ObjetivoEventos.Application.Configuration
         {
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.Use(async (httpContext, next) =>
+            {
+                string userName = httpContext.User.Identity.IsAuthenticated ? httpContext.User.GetUserEmail() : "Guest";
+                LogContext.PushProperty("UserName", userName);
+                await next.Invoke();
+            });
         }
     }
 }

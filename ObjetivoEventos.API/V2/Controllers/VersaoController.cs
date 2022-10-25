@@ -7,7 +7,7 @@ namespace ObjetivoEventos.Application.V2.Controllers
     [ApiController]
     public class VersaoController : ControllerBase
     {
-        const string versao = "Esta é a versão V2.";
+        private const string versao = "Esta é a versão V2.";
 
         /// <summary>
         /// Informa a versão da API.

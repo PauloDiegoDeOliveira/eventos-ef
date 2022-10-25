@@ -15,6 +15,8 @@ namespace ObjetivoEventos.Application.Interfaces
     {
         Task<ViewPagedListDto<Reserva, ViewReservaDto>> GetPaginationAsync(ParametersBase parametersBase);
 
+        Task<ViewValorTotalReservaDto> GetValorTotal(PostListaIdReservaDto postListaIdReservaDto);
+
         Task<List<ViewReservaDto>> GetReservasByTempoSituacaoAsync(int minutos, SituacaoReserva situacaoReserva);
 
         Task<Reserva> GetReservasDetalhesById(Guid id);

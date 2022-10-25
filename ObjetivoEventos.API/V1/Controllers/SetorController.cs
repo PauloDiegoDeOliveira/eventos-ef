@@ -10,6 +10,7 @@ using ObjetivoEventos.Domain.Entitys;
 using ObjetivoEventos.Domain.Enums;
 using ObjetivoEventos.Domain.Pagination;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ObjetivoEventos.Application.V1.Controllers
@@ -47,6 +48,27 @@ namespace ObjetivoEventos.Application.V1.Controllers
             }
 
             return CustomResponse(result, "Setores encontrados.");
+        }
+
+        /// <summary>
+        /// Retorna os dados de dentro de um setor baseado em Ids.
+        /// </summary>
+        /// <param name="postViewDadosSetorDto"></param>
+        /// <returns></returns>
+        [HttpGet("dados")]
+        [ProducesResponseType(typeof(List<ViewSetorDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetSetorDadosByIds([FromQuery] PostViewDadosSetorDto postViewDadosSetorDto)
+        {
+            List<ViewSetorDto> result = await applicationSetor.GetSetorDadosByIds(postViewDadosSetorDto);
+
+            if (result is null)
+            {
+                NotificarErro("Nenhum setor foi encontrado.");
+                return CustomResponse(ModelState);
+            }
+
+            return CustomResponse(result, "Setor encontrado.");
         }
 
         /// <summary>

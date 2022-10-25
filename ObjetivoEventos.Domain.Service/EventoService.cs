@@ -44,6 +44,11 @@ namespace ObjetivoEventos.Domain.Service
             return await eventoRepository.PutStatusRangeAsync(ids, status);
         }
 
+        public bool ValidarEventoExpirado(Guid id)
+        {
+            return eventoRepository.ValidarEventoExpirado(id);
+        }
+
         public bool ValidarId(Guid id)
         {
             return eventoRepository.ValidarId(id);

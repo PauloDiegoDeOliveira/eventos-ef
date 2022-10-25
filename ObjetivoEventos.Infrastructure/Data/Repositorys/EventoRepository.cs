@@ -22,7 +22,7 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
 
         public async Task<PagedList<Evento>> GetPaginationAsync(ParametersEvento parametersEvento)
         {
-            IQueryable<Evento> eventos = appDbContext.Set<Evento>();
+            IQueryable<Evento> eventos = appDbContext.Eventos.OrderByDescending(evento => evento.CriadoEm);
 
             if (parametersEvento.PalavraChave == null && parametersEvento.Id == null && parametersEvento.Status == 0)
                 eventos = eventos.Where(x => x.Status != Status.Excluido.ToString());
@@ -116,6 +116,16 @@ namespace ObjetivoEventos.Infrastructure.Data.Repositorys
         public bool ValidarId(Guid id)
         {
             return appDbContext.Eventos.Any(x => x.Id == id);
+        }
+
+        public bool ValidarEventoExpirado(Guid id)
+        {
+            Evento evento = appDbContext.Eventos.AsNoTracking().FirstOrDefault(x => x.Id == id);
+
+            if (evento == null)
+                return false;
+
+            return DateTime.Today > evento.DataEvento && DateTime.Now > evento.DataEvento.AddHours(evento.Duracao);
         }
 
         public bool ValidarDataHora(Evento evento)

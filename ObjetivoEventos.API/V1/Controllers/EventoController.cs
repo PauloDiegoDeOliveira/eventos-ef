@@ -122,7 +122,7 @@ namespace ObjetivoEventos.Application.V1.Controllers
             if (!ModelState.IsValid)
                 return CustomResponse(ModelState);
 
-            logger.LogInformation("Objeto recebido {@postEventoDto}", postEventoDto);
+            logger.LogWarning("Objeto recebido {@postEventoDto}", postEventoDto);
 
             if (!await PathSystem.ValidateURLs(diretorios.ToString(), ambiente))
             {
@@ -133,10 +133,9 @@ namespace ObjetivoEventos.Application.V1.Controllers
             Dictionary<string, string> Urls = await PathSystem.GetURLs(diretorios.ToString(), ambiente);
 
             ViewEventoDto inserido;
-            using (Operation.Time("----------------Tempo de adição de um novo evento----------------"))
+            using (Operation.Time("Tempo de adição de um novo evento"))
             {
-                logger.LogInformation("----------------Foi requisitada a inserção de um novo evento----------------");
-
+                logger.LogWarning("Foi requisitada a inserção de um novo evento");
                 inserido = await eventoApplication.PostAsync(postEventoDto, Urls["IP"], Urls["DNS"], Urls["SPLIT"]);
             }
 

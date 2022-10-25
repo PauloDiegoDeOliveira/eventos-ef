@@ -57,6 +57,25 @@ namespace ObjetivoEventos.Application.V1.Controllers
         }
 
         /// <summary>
+        /// Retorna o preço total de uma lista de reservas.
+        /// </summary>
+        /// <param name="postListaIdReservaDto"></param>
+        /// <returns></returns>
+        [HttpGet("valor-total")]
+        [ProducesResponseType(typeof(ViewValorTotalReservaDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> GetValorTotal([FromQuery] PostListaIdReservaDto postListaIdReservaDto)
+        {
+            ViewValorTotalReservaDto result = await reservaApplication.GetValorTotal(postListaIdReservaDto);
+
+            if (result is null)
+                return CustomResponse(ModelState);
+
+            return CustomResponse(result, "Valor total da soma das reservas.");
+        }
+
+        /// <summary>
         /// Insere um nova reserva.
         /// </summary>
         /// <param name="postReservaDto"></param>

@@ -12,7 +12,7 @@ namespace ObjetivoEventos.Application.V1.Controllers
     public class VersaoController : ControllerBase
     {
         private readonly Ambiente ambiente;
-        const string versao = "Esta é a versão V1.";
+        private const string versao = "Esta é a versão V1.";
 
         public VersaoController(IWebHostEnvironment environment)
         {

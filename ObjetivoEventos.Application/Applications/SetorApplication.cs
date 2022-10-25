@@ -9,6 +9,7 @@ using ObjetivoEventos.Domain.Entitys;
 using ObjetivoEventos.Domain.Pagination;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ObjetivoEventos.Application.Applications
@@ -27,6 +28,11 @@ namespace ObjetivoEventos.Application.Applications
         {
             PagedList<Setor> pagedList = await serviceSetor.GetPaginationAsync(parametersPalavraChave);
             return new ViewPagedListDto<Setor, ViewSetorDto>(pagedList, mapper.Map<List<ViewSetorDto>>(pagedList));
+        }
+
+        public async Task<List<ViewSetorDto>> GetSetorDadosByIds(PostViewDadosSetorDto postViewDadosSetorDto)
+        {
+            return mapper.Map<List<ViewSetorDto>>(await serviceSetor.GetSetorByReservas(postViewDadosSetorDto.ReservasIds));
         }
 
         public async Task<ViewSetorDto> PostSetorByCadeirasAutomaticoAsync(PostAutomaticoSetorDto postAutomaticoSetorDto)
