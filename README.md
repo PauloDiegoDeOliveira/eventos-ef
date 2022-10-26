@@ -16,7 +16,7 @@
 
 ## 💻 Sobre o projeto
 
-Projeto desenvolvido para reserva de cadeiras
+Projeto desenvolvido para reserva de cadeiras em diversos eventos. 
 
 ---
 
