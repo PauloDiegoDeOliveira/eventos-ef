@@ -75,4 +75,3 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ## 📝 Licença
 
-Copyright © 1997-2022 UNIP - Universidade Paulista. Todos os direitos reservados. Política de Privacidade e Termos de Uso
